@@ -6,11 +6,14 @@ export default {
    
   ],
   theme: {
-    extend: {},
+    extend: {},   
   },
   plugins: [
     require('daisyui',),
     
   ],
+  daisyui: {
+    themes: ['light',  "night"],
+  },
 }
 
