@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import UserContext from '../../context/UserContext'
-
+import { RxCross2 } from "react-icons/rx";
 
 
 
@@ -55,7 +55,7 @@ function Nav() {
                                 </p>
                                 <form method="dialog">
                                     {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Close</button>
+                                    <button className="btn"><RxCross2 /></button>
                                 </form>
                             </div>
                         </div>

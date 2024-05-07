@@ -1,7 +1,8 @@
 import React from 'react'
+import { FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
-
 
     const HandleLogin = async (e) => {
         e.preventDefault();
@@ -38,7 +39,7 @@ function Login() {
 
 
     return (
-        <div>
+        <div className='w-full'>
 
             <form className="card-body bottom-2 border-zinc-500 w-full" onSubmit={(e) => {
               HandleLogin(e);
@@ -62,6 +63,15 @@ function Login() {
                     <button className="btn btn-primary">SignIn</button>
                 </div>
             </form>
+            <div className='flex justify-center items-center gap-3 w-full'>
+                <p>Signin With  </p>
+                <button className="btn btn-square">
+                <FcGoogle className='size-8'/>
+                </button>
+                <button className="btn btn-square">
+                <FaGithub className='size-8'/>
+                </button>
+            </div>
         </div>
 
     )

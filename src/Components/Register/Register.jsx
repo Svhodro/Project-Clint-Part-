@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 function Register() {
     const HandleLogin = async (e) => {
         e.preventDefault();
@@ -66,6 +67,15 @@ function Register() {
                     <button className="btn btn-primary">SignUp</button>
                 </div>
             </form>
+            <div className='flex justify-center items-center gap-3 w-full'>
+                <p>Signin With  </p>
+                <button className="btn btn-square">
+                <FcGoogle className='size-8'/>
+                </button>
+                <button className="btn btn-square">
+                <FaGithub className='size-8'/>
+                </button>
+            </div>
         </div>
     )
 }
