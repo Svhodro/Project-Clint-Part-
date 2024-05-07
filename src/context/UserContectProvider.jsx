@@ -3,12 +3,12 @@ import UserContext from "./UserContext";
 
 
 const UserContextProvider = ({ children }) => {
-    const [id, setId] = useState()
+    const [cart, setCart] = useState(false)
     const [user, setuser] = useState()
     const [register,setRegister]=useState(true)
 
     return (
-        <UserContext.Provider value={{register,setRegister}}>
+        <UserContext.Provider value={{register,setRegister,cart, setCart}}>
             {children}
         </UserContext.Provider>
     )

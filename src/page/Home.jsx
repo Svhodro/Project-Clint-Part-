@@ -3,7 +3,7 @@ import Nav from '../Components/Nav/Nav'
 import Hero from '../Components/Hero/Hero'
 import Footer from '../Components/Footer/Footer'
 import Login from '../Components/Login/Login'
-
+import Cart from '../Components/Cart/Cart'
 
 function Home() {
   return (
@@ -11,8 +11,8 @@ function Home() {
       <Nav />
       <Hero />
       <Footer />
-   
-      
+      <Cart />
+
     </>
   )
 }
