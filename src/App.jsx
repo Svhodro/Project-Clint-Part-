@@ -1,17 +1,19 @@
 import react from "react"
 import { Route, Routes } from "react-router-dom"
 import Home from "./page/Home"
-import Layout from "./page/Layout"
+import UserContextProvider from "./context/UserContectProvider"
+
 
 
 function App() {
 
 
   return (
+    <UserContextProvider>
     <Routes>
-      <Route path="/" element={<Home/>}/> 
-      <Route path="/layout" element={<Layout/>}/>
+      <Route path="/" element={<Home/>}/>      
     </Routes>
+    </UserContextProvider>
 
   )
 }
