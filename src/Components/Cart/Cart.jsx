@@ -47,7 +47,7 @@ const handleOpen =()=>{
 
         <div>
             <Transition.Root show={open} as={Fragment}>
-                <Dialog className="relative z-10" onClose={setOpen}>
+                <Dialog className="relative z-10" onClose={handleOpen}>
                     {/* <Transition.Child
                         as={Fragment}
                         enter="ease-in-out duration-500"

@@ -1,48 +1,95 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { app } from '../../firebase/firebase';
+import { getAuth,signInWithEmailAndPassword } from 'firebase/auth';
+import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider } from "firebase/auth";
+import UserContext from '../../context/UserContext';
 
 function Login() {
-
+    //context api
+    const {user, setuser}=useContext(UserContext)
+    // password and google login
     const HandleLogin = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
-        const password = e.target.pass.value;   
+        const password = e.target.pass.value;
         // console.log(email,password)
-        // await signInWithEmailAndPassword(auth, email, password)
-        //   .then((userCredential) => {
-        //     // Signed in 
-        //     const user = userCredential.user;
-           
-        //     const dbRef = ref(database);
-        //     get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
-        //       if (snapshot.exists()) {          
-        //         localStorage.setItem("dataKey", JSON.stringify(snapshot.val()));
-        //         notify()
-        //         setData(localStorage.getItem("dataKey"))
-        //         setuser(true)
-    
-        //       } else {
-        //         console.log("No data available");
-        //       }
-        //     }).catch((error) => {
-        //       console.error(error);
-        //     });
-        //     // ...
-        //   })
-        //   .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     console.log(errorCode, errorMessage)
-        //   });
-      }
+        const auth = getAuth(app);
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            setuser(true)
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+    }
+    // github login 
+    const handlegit = () => {
 
+        const auth = getAuth(app);
+        const provider = new GithubAuthProvider(app)
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+                const credential = GithubAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+
+                // The signed-in user info.
+                const user = result.user;
+                console.log(user)
+                setuser(true)
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GithubAuthProvider.credentialFromError(error);
+                // ...
+            });
+    }
+    // google login
+    const handlegoogle = () => {
+        // https://fir-198b8.firebaseapp.com/__/auth/handler
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider(app)
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            setuser(true)
+            // console.log(user)
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+          });
+      }
 
     return (
         <div className='w-full'>
 
             <form className="card-body bottom-2 border-zinc-500 w-full" onSubmit={(e) => {
-              HandleLogin(e);
+                HandleLogin(e);
             }}>
                 <div className="flex justify-center w-full text-center">
                     <p className='text-xl font-bold  font-serif '>SignIn</p>
@@ -65,11 +112,11 @@ function Login() {
             </form>
             <div className='flex justify-center items-center gap-3 w-full'>
                 <p>Signin With  </p>
-                <button className="btn btn-square">
-                <FcGoogle className='size-8'/>
+                <button className="btn btn-square" onClick={handlegoogle}>
+                    <FcGoogle className='size-8' />
                 </button>
-                <button className="btn btn-square">
-                <FaGithub className='size-8'/>
+                <button className="btn btn-square" onClick={handlegit}>
+                    <FaGithub className='size-8' />
                 </button>
             </div>
         </div>

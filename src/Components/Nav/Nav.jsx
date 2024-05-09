@@ -5,6 +5,8 @@ import UserContext from '../../context/UserContext'
 import { RxCross2 } from "react-icons/rx";
 import Cart from '../Cart/Cart';
 import { TiShoppingCart } from "react-icons/ti";
+import logo from '../../assets/ShopLogo.webp'
+import { Link } from 'react-router-dom';
 
 
 function Nav() {
@@ -31,17 +33,17 @@ function Nav() {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li className='btn btn-ghost' >About</li>
-                            <li className='btn btn-ghost'>Product's</li>
+                            <li className='btn btn-ghost'><Link to='/products'>Product's</Link></li>
                             <li className='btn btn-ghost'onClick={handleCart}>  Cart</li>
 
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <img src={logo} alt="" className='size-8 ' />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-6">
                         <li className='btn btn-ghost'>About</li>
-                        <li className='btn btn-ghost'>Product's</li>
+                        <li ><Link className='btn btn-ghost' to='/private/products'>Product's</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end gap-6">
